@@ -14,7 +14,7 @@
 #define ADJ  3
 #define MOUSE  4
 
-ZMK_COMBO(esc,  &kp ESC, <0 1>, ALL, 30)
+ZMK_COMBO(esc,  &kp ESC, 0 1, ALL, 30)
 ZMK_COMBO(enter, &kp ENTER, 19 20, ALL, 30)
 ZMK_COMBO(win, &kp LEFT_GUI, 36 37, ALL, 30)
 ZMK_COMBO(quick, &mo QUICK, 15 16, ALL, 30)
