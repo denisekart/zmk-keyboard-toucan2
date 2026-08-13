@@ -1,4 +1,6 @@
 manifest:
+  defaults:
+    revision: v0.3
   remotes:
     - name: zmkfirmware
       url-base: https://github.com/zmkfirmware
@@ -8,6 +10,8 @@ manifest:
       url-base: https://github.com/geeksville
     - name: beekeeb
       url-base: https://github.com/beekeeb
+    - name: urob
+      url-base: https://github.com/urob
   projects:
     - name: zmk
       remote: zmkfirmware
@@ -21,6 +25,18 @@ manifest:
       revision: main
     - name: zmk-input-zoom
       remote: beekeeb
+      revision: main
+    - name: zmk-adaptive-key
+      remote: urob
+      revision: main
+    - name: zmk-auto-layer
+      remote: urob
+      revision: main
+    - name: zmk-helpers
+      remote: urob
+      revision: main
+    - name: zmk-leader-key
+      remote: urob
       revision: main
   self:
     path: config

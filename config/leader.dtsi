@@ -1,0 +1,313 @@
+/* config/leader.dtsi
+ * Windows-only. JetBrains Rider minimal.
+ * Optional build.conf: CONFIG_ZMK_LEADER_TIMEOUT=1000
+ */
+
+ / {
+  behaviors {
+    /* ---------- Pair insertions ---------- */
+
+    /* Pair () and place cursor inside */
+    pair_paren: pair_paren {
+      compatible = "zmk,behavior-macro";
+      #binding-cells = <0>;
+      bindings = <&kp LPAR &kp RPAR &kp LEFT>;
+    };
+
+    /* Pair "" and place cursor inside */
+    pair_dquote: pair_dquote {
+      compatible = "zmk,behavior-macro";
+      #binding-cells = <0>;
+      bindings = <&kp DQT &kp DQT &kp LEFT>;
+    };
+
+    /* ---------- Wrap SELECTION ---------- */
+
+    /* Wrap selection with "" */
+    dq_sel: dq_sel {
+      compatible = "zmk,behavior-macro";
+      #binding-cells = <0>;
+      bindings = <&kp LC(X) &kp DQT &kp LC(V) &kp DQT>;
+    };
+
+    /* Wrap selection with () */
+    paren_sel: paren_sel {
+      compatible = "zmk,behavior-macro";
+      #binding-cells = <0>;
+      bindings = <&kp LC(X) &kp LPAR &kp LC(V) &kp RPAR>;
+    };
+
+    dq_w: dq_w {
+      compatible = "zmk,behavior-macro";
+      #binding-cells = <0>;
+      bindings = <&macro_tap_time 150>,
+        <
+        &kp LC(LEFT)        /* Move to word start */
+        &kp DQT             /* Type opening " */
+        &kp LC(RIGHT)           /* Move cursor after word */
+        &kp DQT             /* Type closing " */
+        >;
+    };
+    
+    paren_w: paren_w {
+      compatible = "zmk,behavior-macro";
+      #binding-cells = <0>;
+      bindings = <&macro_tap_time 150>,
+        <
+        &kp LC(LEFT)        /* Move to word start */
+        &kp LPAR             /* Type opening " */
+        &kp LC(RIGHT)           /* Move cursor after word */
+        &kp RPAR             /* Type closing " */
+        >;
+    };
+
+    
+    duplicate_line: duplicate_line {
+        compatible = "zmk,behavior-macro";
+        #binding-cells = <0>;
+        bindings = <
+            &kp HOME          // Move to start of line
+            &kp LS(END)       // Select to end of line (Shift+End)
+            &kp LC(C)         // Copy
+            &kp END           // Move to end of line
+            &kp ENTER         // New line
+            &kp LC(V)         // Paste
+        >;
+    };
+
+    copy_line: copy_line {
+        compatible = "zmk,behavior-macro";
+        #binding-cells = <0>;
+        bindings = <
+            &kp HOME          // Move to start of line
+            &kp LS(END)       // Select to end of line (Shift+End)
+            &kp LC(C)         // Copy
+        >;
+    };
+
+    duplicate_sel: duplicate_sel {
+        compatible = "zmk,behavior-macro";
+        #binding-cells = <0>;
+        bindings = <
+            &kp LC(C)         // Copy
+            &kp END           // Move to end of line
+            &kp ENTER         // New line
+            &kp LC(V)         // Paste
+        >;
+    };
+
+    /* ---------- Other originals ---------- */
+
+    /* => */
+    arrow_fat: arrow_fat {
+      compatible = "zmk,behavior-macro";
+      #binding-cells = <0>;
+      bindings = <&kp EQUAL &kp GT>;
+    };
+
+    not_equal: not_equal {
+      compatible = "zmk,behavior-macro";
+      #binding-cells = <0>;
+      bindings = <&kp EXCL &kp EQUAL>;
+    };
+
+    equal_equal: equal_equal {
+      compatible = "zmk,behavior-macro";
+      #binding-cells = <0>;
+      bindings = <&kp EQUAL &kp EQUAL>;
+    };
+
+
+
+    /* ---------- Markdown (code-focused minimal) ---------- */
+
+    /* Code fence block with cursor between fences */
+    md_code_fence: md_code_fence {
+      compatible = "zmk,behavior-macro";
+      #binding-cells = <0>;
+      bindings = <
+        &kp GRAVE &kp GRAVE &kp GRAVE
+        &kp ENTER &kp ENTER
+        &kp GRAVE &kp GRAVE &kp GRAVE
+        &kp UP
+      >;
+    };
+
+    /* ---------- Rider (minimal) ---------- */
+
+    /* Toggle line comment: Ctrl+/ */
+    rider_comment_toggle: rider_comment_toggle {
+      compatible = "zmk,behavior-macro";
+      #binding-cells = <0>;
+      bindings = <&kp LC(FSLH)>;
+    };
+
+    /* Format code: Ctrl+Alt+Enter */
+    rider_format_code: rider_format_code {
+      compatible = "zmk,behavior-macro";
+      #binding-cells = <0>;
+      bindings = <&kp LC(LA(ENTER))>;
+    };
+
+    /* Optimize imports: Ctrl+Alt+O */
+    rider_optimize_imports: rider_optimize_imports {
+      compatible = "zmk,behavior-macro";
+      #binding-cells = <0>;
+      bindings = <&kp LC(LA(O))>;
+    };
+
+    rider_quick_doc: rider_quick_doc {
+      compatible = "zmk,behavior-macro";
+      #binding-cells = <0>;
+      bindings = <&kp LC(K) &kp I>;
+    };
+
+    
+    
+    /* € Euro Sign (Alt+0128) */
+    euro_sign: euro_sign {
+        compatible = "zmk,behavior-macro";
+        #binding-cells = <0>;
+        wait-ms = <40>;
+        tap-ms = <40>;
+        bindings
+            = <&macro_press   &kp LALT>
+            , <&macro_tap     &kp KP_N0 &kp KP_N1 &kp KP_N2 &kp KP_N8>
+            , <&macro_release &kp LALT>
+            ;
+    };
+
+    
+    /* Č (Alt+0268) */
+    macro_cuppercaron: macro_cuppercaron {
+        compatible = "zmk,behavior-macro";
+        #binding-cells = <0>;
+        wait-ms = <40>; tap-ms = <40>;
+        bindings = <&macro_press &kp LALT>
+                  , <&macro_tap &kp KP_N0 &kp KP_N2 &kp KP_N6 &kp KP_N8>
+                  , <&macro_release &kp LALT>;
+    };
+
+    /* č (Alt+0269) */
+    macro_ccaron: macro_ccaron {
+        compatible = "zmk,behavior-macro";
+        #binding-cells = <0>;
+        wait-ms = <40>; tap-ms = <40>;
+        bindings = <&macro_press &kp LALT>
+                  , <&macro_tap &kp KP_N0 &kp KP_N2 &kp KP_N6 &kp KP_N9>
+                  , <&macro_release &kp LALT>;
+    };
+
+    /* Ž (Alt+0142) */
+    macro_zuppercaron: macro_zuppercaron {
+        compatible = "zmk,behavior-macro";
+        #binding-cells = <0>;
+        wait-ms = <40>; tap-ms = <40>;
+        bindings = <&macro_press &kp LALT>
+                  , <&macro_tap &kp KP_N0 &kp KP_N1 &kp KP_N4 &kp KP_N2>
+                  , <&macro_release &kp LALT>;
+    };
+
+    /* ž (Alt+0158) */
+    macro_zcaron: macro_zcaron {
+        compatible = "zmk,behavior-macro";
+        #binding-cells = <0>;
+        wait-ms = <40>; tap-ms = <40>;
+        bindings = <&macro_press &kp LALT>
+                  , <&macro_tap &kp KP_N0 &kp KP_N1 &kp KP_N5 &kp KP_N8>
+                  , <&macro_release &kp LALT>;
+    };
+
+    /* Š (Alt+0352) */
+    macro_suppercaron: macro_suppercaron {
+        compatible = "zmk,behavior-macro";
+        #binding-cells = <0>;
+        wait-ms = <40>; tap-ms = <40>;
+        bindings = <&macro_press &kp LALT>
+                  , <&macro_tap &kp KP_N0 &kp KP_N3 &kp KP_N5 &kp KP_N2>
+                  , <&macro_release &kp LALT>;
+    };
+
+    /* š (Alt+0353) */
+    macro_scaron: macro_scaron {
+        compatible = "zmk,behavior-macro";
+        #binding-cells = <0>;
+        wait-ms = <40>; tap-ms = <40>;
+        bindings = <&macro_press &kp LALT>
+                  , <&macro_tap &kp KP_N0 &kp KP_N3 &kp KP_N5 &kp KP_N3>
+                  , <&macro_release &kp LALT>;
+    };
+
+    
+    /* Č / č */
+    morph_ch: morph_ch {
+        compatible = "zmk,behavior-mod-morph";
+        #binding-cells = <0>;
+        bindings = <&macro_cuppercaron &macro_ccaron>;
+        mods = <(MOD_LSFT|MOD_RSFT)>;
+    };
+
+    /* Ž / ž */
+    morph_zh: morph_zh {
+        compatible = "zmk,behavior-mod-morph";
+        #binding-cells = <0>;
+        bindings = <&macro_zuppercaron &macro_zcaron>;
+        mods = <(MOD_LSFT|MOD_RSFT)>;
+    };
+
+    /* Š / š */
+    morph_sh: morph_sh {
+        compatible = "zmk,behavior-mod-morph";
+        #binding-cells = <0>;
+        bindings = <&macro_suppercaron &macro_scaron>;
+        mods = <(MOD_LSFT|MOD_RSFT)>;
+    };
+
+
+
+    /* ---------- Leader + all sequences attached here ---------- */
+
+    leader1: leader1 {
+      compatible = "zmk,behavior-leader-key";
+      #binding-cells = <0>;
+      ignore-keys = <LSHFT RSHFT>;
+
+      /* Text */
+      pair_paren_seq   { sequence = <P P>;     bindings = <&pair_paren>;            };
+      paren_sel_seq    { sequence = <P S>;     bindings = <&paren_sel>;             };
+      paren_w_seq    { sequence = <P W>;     bindings = <&paren_w>;             };
+      pair_dquote_seq  { sequence = <Q Q>;     bindings = <&pair_dquote>;           };
+      dq_sel_seq       { sequence = <Q S>;   bindings = <&dq_sel>;                };
+      dq_w_seq       { sequence = <Q W>;   bindings = <&dq_w>;                };
+      duplicate_line_seq    { sequence = <D D>;     bindings = <&duplicate_line>;             };
+      duplicate_sel_seq    { sequence = <D S>;     bindings = <&duplicate_sel>;             };
+
+      /* Markdown (minimal) */
+      md_fence_seq     { sequence = <C B>;     bindings = <&md_code_fence>;         };
+
+      /* Rider (minimal) */
+      rider_comment_seq{ sequence = <C C>;     bindings = <&rider_comment_toggle>;  };
+      rider_format_seq { sequence = <C F>;     bindings = <&rider_format_code>;     };
+      rider_imports_seq{ sequence = <C I>;     bindings = <&rider_optimize_imports>;};
+      rider_refactor_seq{ sequence = <R R>;     bindings = <&kp LC(LS(R))>;};/*rider refactor*/
+      rider_gotoimpl_seq{ sequence = <R I>;     bindings = <&kp LC(F12)>;}; /*rider implementation*/
+      rider_gototype_seq{ sequence = <R T>;     bindings = <&kp LC(LS(F11))>;}; /*rider type*/
+      rider_run_seq{ sequence = <R G>;     bindings = <&kp F5>;}; /*rider go*/
+      rider_debug_next_seq{ sequence = <R K>;     bindings = <&kp F10>;};/*rider arrow down*/
+      rider_debug_step_into_seq{ sequence = <R L>;     bindings = <&kp LA(LS(F11))>;};/*rider arrow right*/
+      rider_debug_step_out_seq{ sequence = <R J>;     bindings = <&kp LS(F11)>;}; /*rider arrow left*/
+      rider_debug_skiptocursor_seq{ sequence = <R U>;     bindings = <&kp LC(LS(F10))>;}; /*rider shifted arrow left*/
+      rider_debug_runtocursor_seq{ sequence = <R O>;     bindings = <&kp LC(F10)>;}; /*rider shifted arrow right*/
+      rider_quick_doc_seq{ sequence = <R D>;     bindings = <&rider_quick_doc>;}; /* rider doc */
+      rider_complete_statement_seq{ sequence = <R S>;     bindings = <&kp LC(LS(ENTER))>;}; /* rider statement */
+      
+      screenshot_seq{ sequence = <S S>;     bindings = <&kp LG(LS(S))>;}; 
+      emoji_seq{ sequence = <E E>;     bindings = <&kp LG(DOT)>;}; 
+      euro_sign_seq{ sequence = <E U>;     bindings = <&euro_sign>;}; 
+
+      sh_seq{ sequence = <V S>;     bindings = <&morph_sh>;}; 
+      ch_seq{ sequence = <V C>;     bindings = <&morph_ch>;}; 
+      zh_seq{ sequence = <V Z>;     bindings = <&morph_zh>;}; 
+    };
+  };
+};

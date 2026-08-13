@@ -1,0 +1,70 @@
+#include <input/processors.dtsi>
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/outputs.h>
+#include <dt-bindings/zmk/pointing.h>
+
+
+#define SMO(name, normal, shifted) \
+    name: name { \
+        compatible = "zmk,behavior-mod-morph"; \
+        #binding-cells = <0>; \
+        bindings = <&kp normal>, <&kp shifted>; \
+        mods = <(MOD_LSFT|MOD_RSFT)>; \
+    };
+
+/ {
+    behaviors {
+
+        SMO(m_plus_equal, PLUS, EQUAL)
+        SMO(m_comma_semi, COMMA, SEMI)
+        SMO(m_dot_colon, DOT, COLON)
+        SMO(m_qmark_excl, QMARK, EXCL)
+        SMO(m_and_or, AMPS, PIPE)
+        SMO(m_slash, FSLH, BSLH)
+
+        SMO(m_open_paren_arrow, LPAR, LT)
+        SMO(m_close_paren_arrow, RPAR, GT)
+
+        SMO(m_open_curly_square, LBRC, LBKT)
+        SMO(m_close_curly_square, RBRC, RBKT)
+
+        td_equals: td_equals {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&equal_equal>, <&not_equal>;
+        };
+
+        td_pst: td_pst {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&kp LC(V)>, <&kp LG(V)>; 
+        };
+
+        td_cpy: td_cpy {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&kp LC(C)>, <&copy_line>; 
+        };
+
+        mod_v: mod_v {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp V>, <&td_pst>;
+            mods = <(MOD_LCTL|MOD_RCTL)>;
+        };
+
+        mod_c: mod_c {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp C>, <&td_cpy>;
+            mods = <(MOD_LCTL|MOD_RCTL)>;
+        };
+
+    };
+
+};

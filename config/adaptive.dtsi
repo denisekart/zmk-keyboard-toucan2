@@ -1,0 +1,37 @@
+
+
+#define ADAPTIVE_KEY_TIMEOUT 1500
+
+#define ADAPTIVE(NAME, BINDINGS, TRIGGERS) \
+    magic_##NAME: magic_##NAME { \
+        trigger-keys = <TRIGGERS>; \
+        bindings = <BINDINGS>; \
+        max-prior-idle-ms = <ADAPTIVE_KEY_TIMEOUT>; \
+        strict-modifiers; \
+    };
+
+ZMK_BEHAVIOR(ska, sticky_key,
+    bindings = <&kp>;
+    release-after-ms = <ADAPTIVE_KEY_TIMEOUT>;
+    quick-release;
+)
+
+ZMK_BEHAVIOR(mc_space_sentence, macro,
+    wait-ms = <10>;
+    tap-ms = <10>;
+    bindings = <&kp SPACE &ska LSHFT>;
+)
+
+/ {
+    behaviors {        
+        ak_space: ak_space {
+            compatible = "zmk,behavior-adaptive-key";
+            #binding-cells = <0>;
+            bindings = <&kp SPACE>;
+
+            ADAPTIVE(punct_space , &mc_space_sentence , QMARK EXCL DOT)
+            ADAPTIVE(punct_cancel , &kp K_CANCEL , LSHFT)
+        };
+
+    };
+};
