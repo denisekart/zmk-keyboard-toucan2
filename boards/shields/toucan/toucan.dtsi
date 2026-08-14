@@ -160,5 +160,10 @@
                 &zip_scroll_transform INPUT_TRANSFORM_X_INVERT
             >;
         };
+        
+        slow_speed {
+                layers = <5>;                          // spd_slow -> 0.5x  (0.80 * 5/8)
+                input-processors = <&zip_xy_scaler 5 8>;
+            };
     };
 };

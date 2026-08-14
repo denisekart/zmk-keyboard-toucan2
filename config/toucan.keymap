@@ -13,6 +13,8 @@
 #define SYM  2
 #define ADJ  3
 #define MOUSE  4
+#define SLOW  5
+
 
 ZMK_COMBO(esc,  &kp ESC, 0 1, ALL, 30)
 ZMK_COMBO(enter, &kp ENTER, 19 20, ALL, 30)
@@ -24,6 +26,7 @@ ZMK_COMBO(mouse_mclk_l, &mkp MCLK, 26 27 28 29, ALL, 30)
 ZMK_COMBO(mouse_lclk_r, &mkp LCLK, 30 31, ALL, 30)
 ZMK_COMBO(mouse_rclk_r, &mkp RCLK, 30 31 32, ALL, 30)
 ZMK_COMBO(mouse_mclk_r, &mkp MCLK, 30 31 32 33, ALL, 30)
+ZMK_COMBO(quick, &mo SLOW, 15 16, ALL, 30)
 
 ZMK_CONDITIONAL_LAYER(sys, NAV SYM, ADJ)
 
@@ -81,4 +84,11 @@ ZMK_LAYER(move,
     &trans &none &mkp MB4 &msc SCRL_DOWN &mkp MB5 &none        &mkp RCLK &none &none &none &none &none
     &trans &none &none &none &none &none                        &mkp MCLK &none &none &none &none &none
             &mkp MCLK &mkp RCLK &mkp LCLK                            &trans &trans &trans
+)
+
+ZMK_LAYER(slow,
+    &trans &trans &trans &trans &trans &trans              &trans &trans &trans &trans &trans &trans
+    &trans &trans &trans &trans &trans &trans             &trans &trans &trans &trans &trans &trans
+    &trans &trans &trans &trans &trans &trans             &trans &trans &trans &trans &trans &trans
+                        &mkp MCLK &mkp RCLK &mkp LCLK              &trans &trans &trans
 )
