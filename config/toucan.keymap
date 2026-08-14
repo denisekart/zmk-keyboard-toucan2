@@ -52,7 +52,7 @@ ZMK_BEHAVIOR(lead_kp, hold_tap,
 
 ZMK_LAYER(base,
     &kp TAB   &kp Q &kp W &kp E &kp R &kp T      &kp Z &kp U  &kp I     &kp O   &kp P    &m_plus_equal
-    &mo MOUSE &kp A &kp S &kp D &kp F &kp G      &kp H &kp J  &kp K     &kp L   &kp SQT &kp MINUS
+    &mo SLOW &kp A &kp S &kp D &kp F &kp G      &kp H &kp J  &kp K     &kp L   &kp SQT &kp MINUS
     &kp LCTRL &kp Y &kp X &mod_c &mod_v &kp B    &kp N &kp M  &m_comma_semi &m_dot_colon &m_qmark_excl &m_slash
         &lead_kp LALT 0 &sk LSHFT &ak_space      &ltb SYM BKSP &mo NAV &kp DEL
 )
