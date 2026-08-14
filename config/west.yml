@@ -21,7 +21,7 @@ manifest:
       remote: caksoylar
       revision: v0.3
     - name: zmk_driver_azoteq
-      remote: beekeeb
+      remote: geeksville
       revision: main
     - name: zmk-input-zoom
       remote: beekeeb
