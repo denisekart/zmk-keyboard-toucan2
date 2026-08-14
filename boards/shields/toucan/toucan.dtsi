@@ -146,24 +146,24 @@
         status = "disabled";
         device = <&trackpad_split>;
         input-processors = <
-        &zip_xy_scaler 4 5>, 
-        <&zip_scroll_scaler 1 20>, 
+        &zip_xy_scaler 1 1>, 
+        <&zip_scroll_scaler 1 15>, 
         <&zip_zoom_mapper>,
         <&is_touching_processor>, 
         <&swipe_button_mapper>;
         
         scroller {
-            layers = <3>;
+            layers = <2>;
             input-processors = <
                 &zip_xy_to_scroll_mapper
-                &zip_scroll_scaler 1 20
+                &zip_scroll_scaler 1 15
                 &zip_scroll_transform INPUT_TRANSFORM_X_INVERT
             >;
         };
         
         slow_speed {
                 layers = <5>;                          // spd_slow -> 0.5x  (0.80 * 5/8)
-                input-processors = <&zip_xy_scaler 5 8>;
+                input-processors = <&zip_xy_scaler 1 2>;
             };
     };
 };
