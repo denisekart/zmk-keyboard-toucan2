@@ -22,7 +22,7 @@ manifest:
       revision: v0.3
     - name: zmk_driver_azoteq
       remote: geeksville
-      revision: main
+      revision: master
     - name: zmk-input-zoom
       remote: beekeeb
       revision: main
