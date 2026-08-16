@@ -123,7 +123,12 @@
             #input-processor-cells = <0>;
             codes = <INPUT_BTN_NORTH INPUT_BTN_EAST INPUT_BTN_SOUTH INPUT_BTN_WEST>;
 #ifdef TOUCAN_WIN_MODE
-            bindings = <&kp LG(TAB)>, <&kp LG(RIGHT)>, <&kp LG(D)>, <&kp LG(LEFT)>;
+            bindings = <
+                &kp LG(TAB)          // Swipe up → Task View
+                &kp LC(LG(RIGHT))    // Swipe right → Next desktop
+                &kp LG(D)            // Swipe down → Show desktop
+                &kp LC(LG(LEFT))     // Swipe left → Previous desktop
+            >;
 #else
             bindings = <&kp LC(LG(UP))>, <&kp LC(LG(RIGHT))>, <&kp LC(LG(DOWN))>, <&kp LC(LG(LEFT))>;
 #endif
@@ -146,17 +151,17 @@
         status = "disabled";
         device = <&trackpad_split>;
         input-processors = <
-        &zip_xy_scaler 1 1>, 
-        <&zip_scroll_scaler 1 15>, 
+        &zip_xy_scaler 4 5>, 
+        <&zip_scroll_scaler 1 13>, 
         <&zip_zoom_mapper>,
         <&is_touching_processor>, 
-        <&swipe_button_mapper>;
+        <&swipe_button_mapper>; 
         
         scroller {
             layers = <2>;
             input-processors = <
                 &zip_xy_to_scroll_mapper
-                &zip_scroll_scaler 1 15
+                &zip_scroll_scaler 1 13
                 &zip_scroll_transform INPUT_TRANSFORM_X_INVERT
             >;
         };
