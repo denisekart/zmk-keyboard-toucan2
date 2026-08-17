@@ -152,7 +152,7 @@
         device = <&trackpad_split>;
         input-processors = <
         &zip_xy_scaler 4 5>, 
-        <&zip_scroll_scaler 1 13>, 
+        <&zip_scroll_scaler 1 12>, 
         <&zip_zoom_mapper>,
         <&is_touching_processor>, 
         <&swipe_button_mapper>; 
@@ -161,7 +161,7 @@
             layers = <2>;
             input-processors = <
                 &zip_xy_to_scroll_mapper
-                &zip_scroll_scaler 1 13
+                &zip_scroll_scaler 1 12
                 &zip_scroll_transform INPUT_TRANSFORM_X_INVERT
             >;
         };
