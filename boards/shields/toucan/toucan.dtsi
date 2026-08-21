@@ -167,7 +167,7 @@
         };
         
         slow_speed {
-                layers = <5>;                          // spd_slow -> 0.5x  (0.80 * 5/8)
+                layers = <5>;
                 input-processors = <&zip_xy_scaler 5 8>;
             };
     };
