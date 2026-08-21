@@ -237,7 +237,7 @@
         >;
     };
 
-    /* Š (Alt+0138) — corrected Alt-code */
+    /* Š (Alt+0138) */
     macro_suppercaron: macro_suppercaron {
         compatible = "zmk,behavior-macro";
         #binding-cells = <0>;
@@ -252,7 +252,7 @@
         >;
     };
 
-    /* š (Alt+0154) — corrected Alt-code */
+    /* š (Alt+0154) */
     macro_scaron: macro_scaron {
         compatible = "zmk,behavior-macro";
         #binding-cells = <0>;
@@ -266,6 +266,7 @@
             &macro_release LALT
         >;
     };
+
 
     /* Č / č */
     morph_ch: morph_ch {
