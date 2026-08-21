@@ -64,7 +64,7 @@
         scroll-sensitivity = <100>;
         zoom-sensitivity = <100>;
         filter-settings=<0x0B>;
-        hold-time = <350>;
+        hold-time = <320>;
 
         zoom;
         scroll;
@@ -78,7 +78,6 @@
         //invert-scroll-y;
         invert-scroll-x;
 
-        tap-and-drag;
         drag-continuation;
         three-finger-tap;
     };
