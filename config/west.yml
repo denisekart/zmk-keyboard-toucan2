@@ -12,6 +12,8 @@ manifest:
       url-base: https://github.com/beekeeb
     - name: urob
       url-base: https://github.com/urob
+    - name: denisekart
+      url-base: https://github.com/denisekart
   projects:
     - name: zmk
       remote: zmkfirmware
@@ -21,7 +23,7 @@ manifest:
       remote: caksoylar
       revision: v0.3
     - name: zmk_driver_azoteq
-      remote: geeksville
+      remote: denisekart
       revision: master
     - name: zmk-input-zoom
       remote: beekeeb
