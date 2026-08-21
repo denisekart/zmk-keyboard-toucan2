@@ -181,92 +181,67 @@
     macro_cuppercaron: macro_cuppercaron {
         compatible = "zmk,behavior-macro";
         #binding-cells = <0>;
-        wait-ms = <20>; tap-ms = <20>;
-        bindings = <
-            &macro_press LALT
-            &kp KP_N0
-            &kp KP_N2
-            &kp KP_N6
-            &kp KP_N8
-            &macro_release LALT
-        >;
+        wait-ms = <40>; tap-ms = <40>;
+        bindings =
+            <&macro_press &kp LALT>,
+            <&macro_tap   &kp KP_N0 &kp KP_N2 &kp KP_N6 &kp KP_N8>,
+            <&macro_release &kp LALT>;
     };
 
     /* č (Alt+0269) */
     macro_ccaron: macro_ccaron {
         compatible = "zmk,behavior-macro";
         #binding-cells = <0>;
-        wait-ms = <20>; tap-ms = <20>;
-        bindings = <
-            &macro_press LALT
-            &kp KP_N0
-            &kp KP_N2
-            &kp KP_N6
-            &kp KP_N9
-            &macro_release LALT
-        >;
+        wait-ms = <40>; tap-ms = <40>;
+        bindings =
+            <&macro_press &kp LALT>,
+            <&macro_tap   &kp KP_N0 &kp KP_N2 &kp KP_N6 &kp KP_N9>,
+            <&macro_release &kp LALT>;
     };
 
     /* Ž (Alt+0142) */
     macro_zuppercaron: macro_zuppercaron {
         compatible = "zmk,behavior-macro";
         #binding-cells = <0>;
-        wait-ms = <20>; tap-ms = <20>;
-        bindings = <
-            &macro_press LALT
-            &kp KP_N0
-            &kp KP_N1
-            &kp KP_N4
-            &kp KP_N2
-            &macro_release LALT
-        >;
+        wait-ms = <40>; tap-ms = <40>;
+        bindings =
+            <&macro_press &kp LALT>,
+            <&macro_tap   &kp KP_N0 &kp KP_N1 &kp KP_N4 &kp KP_N2>,
+            <&macro_release &kp LALT>;
     };
 
     /* ž (Alt+0158) */
     macro_zcaron: macro_zcaron {
         compatible = "zmk,behavior-macro";
         #binding-cells = <0>;
-        wait-ms = <20>; tap-ms = <20>;
-        bindings = <
-            &macro_press LALT
-            &kp KP_N0
-            &kp KP_N1
-            &kp KP_N5
-            &kp KP_N8
-            &macro_release LALT
-        >;
+        wait-ms = <40>; tap-ms = <40>;
+        bindings =
+            <&macro_press &kp LALT>,
+            <&macro_tap   &kp KP_N0 &kp KP_N1 &kp KP_N5 &kp KP_N8>,
+            <&macro_release &kp LALT>;
     };
 
     /* Š (Alt+0138) */
     macro_suppercaron: macro_suppercaron {
         compatible = "zmk,behavior-macro";
         #binding-cells = <0>;
-        wait-ms = <20>; tap-ms = <20>;
-        bindings = <
-            &macro_press LALT
-            &kp KP_N0
-            &kp KP_N1
-            &kp KP_N3
-            &kp KP_N8
-            &macro_release LALT
-        >;
+        wait-ms = <40>; tap-ms = <40>;
+        bindings =
+            <&macro_press &kp LALT>,
+            <&macro_tap   &kp KP_N0 &kp KP_N1 &kp KP_N3 &kp KP_N8>,
+            <&macro_release &kp LALT>;
     };
 
     /* š (Alt+0154) */
     macro_scaron: macro_scaron {
         compatible = "zmk,behavior-macro";
         #binding-cells = <0>;
-        wait-ms = <20>; tap-ms = <20>;
-        bindings = <
-            &macro_press LALT
-            &kp KP_N0
-            &kp KP_N1
-            &kp KP_N5
-            &kp KP_N4
-            &macro_release LALT
-        >;
+        wait-ms = <40>; tap-ms = <40>;
+        bindings =
+            <&macro_press &kp LALT>,
+            <&macro_tap   &kp KP_N0 &kp KP_N1 &kp KP_N5 &kp KP_N4>,
+            <&macro_release &kp LALT>;
     };
-
 
     /* Č / č */
     morph_ch: morph_ch {
