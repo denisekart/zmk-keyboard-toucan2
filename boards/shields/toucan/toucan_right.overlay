@@ -85,7 +85,7 @@
         drag-continuation;
         drag-continuation-edge-buffer = <100>; // default 80 +25%: easier to catch, still edge-only
 
-        force-touch; // binding defaults: delta 300, hysteresis 120 — field-tune before overriding
+        force-touch; // binding defaults: delta 500, hysteresis 200 — field-tune before overriding
         three-finger-tap;
     };
 };
