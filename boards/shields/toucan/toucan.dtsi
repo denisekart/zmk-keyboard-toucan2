@@ -101,7 +101,7 @@
             compatible = "zmk,input-processor-zoom";
             #input-processor-cells = <0>;
             event-code = <INPUT_REL_MISC>;
-            sensitivity = <10>;
+            sensitivity = <25>; /* one app-zoom step per 25 pinch units — deliberate increments, not bursts */
 #ifdef TOUCAN_WIN_MODE
             bindings = <&kp LC(MINUS)>, <&kp LC(EQUAL)>;
 #else

@@ -57,9 +57,13 @@
 
         enable-power-management;
         // idle-sleep; // provides maximal power savings but when ZMK is idle (i.e. you haven't used keyboard in 30secs) the touchpad will not work.  not recommended.
-        timeout-lp1 = <3>; // 60s timeout before entering lp2 state (20 secs per unit) (default was 20s)
-        report-rate-lp2 = <160>; // 640ms report rate in LP2 state means 55uA draw rather than default 160ms 174uA draw
-        scroll-angle = <30>; // The default angle (about 47 deg) is too big on toucan2 I think
+        timeout-lp1 = <6>; // 2min in LP1 (80ms rate) before LP2 deep sleep (was 3 = 60s) — snappier wake, small idle cost
+        report-rate-lp2 = <120>; // 120ms wake cadence in LP2 (register unit is plain ms; was 160) — faster wake, slight idle cost
+        report-rate-idle = <20>; // 20ms poll while pad-idle (preset 50): first touch after a pause feels instant
+        timeout-idle-touch = <120>; // linger 2min in IDLE-TOUCH (50ms) after touch ends (preset 60s): back-to-back use stays hot
+        scroll-angle = <30>;
+        zoom-initial-distance = <12>; // explicit pinch gate (factory preset was never written/known); raise by 4 if hair-trigger
+        zoom-consecutive-distance = <6>; // half of initial: once zooming, keep flowing
         sensitivity = <100>;
         scroll-sensitivity = <100>;
         zoom-sensitivity = <100>;
