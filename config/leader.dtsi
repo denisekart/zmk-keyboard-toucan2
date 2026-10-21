@@ -313,6 +313,7 @@
       zh_seq{ sequence = <Z H>;     bindings = <&morph_zh>;}; 
       mouse_mover_seq{ sequence = <M M>;   bindings = <&mouse_mover 0>;}; /* jiggler on/off, straight */
       mouse_mover_nat_seq{ sequence = <M N>; bindings = <&mouse_mover 1>;}; /* jiggler on/off, natural curves */
+      soft_reset_seq{ sequence = <Z Z Z>; bindings = <&soft_reset>;}; /* full input-state reset */
     };
   };
 };

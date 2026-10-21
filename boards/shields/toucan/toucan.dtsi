@@ -15,6 +15,13 @@
         //zmk,physical-layout = &physical_layout0;
     };
 
+    behaviors {
+        soft_reset: soft_reset {
+            compatible = "zmk,behavior-tps43-soft-reset";
+            #binding-cells = <0>;
+        };
+    };
+
     kscan0: kscan_0 {
         compatible = "zmk,kscan-gpio-matrix";
         diode-direction = "col2row";
