@@ -25,6 +25,9 @@ manifest:
     - name: zmk_driver_azoteq
       remote: denisekart
       revision: master
+    - name: zmk-mouse-mover
+      remote: denisekart
+      revision: main
     - name: zmk-input-zoom
       remote: beekeeb
       revision: main

@@ -47,6 +47,10 @@ nice_view_spi: &spi0 {
     status = "okay";
 };
 
+&mouse_mover_listener {
+    status = "okay";
+};
+
 &zip_zoom_mapper {
     status = "okay";
 };
