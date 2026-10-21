@@ -311,7 +311,8 @@
       sh_seq{ sequence = <S H>;     bindings = <&morph_sh>;}; 
       ch_seq{ sequence = <C H>;     bindings = <&morph_ch>;}; 
       zh_seq{ sequence = <Z H>;     bindings = <&morph_zh>;}; 
-      mouse_mover_seq{ sequence = <M M>;   bindings = <&mouse_mover 0>;}; /* jiggler on/off */
+      mouse_mover_seq{ sequence = <M M>;   bindings = <&mouse_mover 0>;}; /* jiggler on/off, straight */
+      mouse_mover_nat_seq{ sequence = <M N>; bindings = <&mouse_mover 1>;}; /* jiggler on/off, natural curves */
     };
   };
 };

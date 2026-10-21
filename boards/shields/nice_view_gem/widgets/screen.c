@@ -12,6 +12,7 @@ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 #include <zmk/events/layer_state_changed.h>
 #include <zmk/events/usb_conn_state_changed.h>
 #include <zmk/events/wpm_state_changed.h>
+#include <zmk/events/mouse_mover_state_changed.h>
 #include <zmk/battery.h>
 #include <zmk/ble.h>
 #include <zmk/display.h>
@@ -45,6 +46,19 @@ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 #include "screen.h"
 #include "sleep.h"
 
+static bool mm_on; /* mouse mover toggle state; event-driven, off at boot */
+
+/* Static ~9px mouse-cursor glyph, bottom-left, while the mover is on. */
+static void draw_mouse_mover_indicator(lv_obj_t *canvas) {
+    lv_draw_rect_dsc_t rd;
+    init_rect_dsc(&rd, LVGL_FOREGROUND);
+    int b = SCREEN_HEIGHT - 4; /* glyph bottom row */
+    lv_canvas_draw_rect(canvas, 1, b - 11, 2, b - 1, &rd);
+    lv_canvas_draw_rect(canvas, 3, b - 9, 4, b - 3, &rd);
+    lv_canvas_draw_rect(canvas, 5, b - 7, 6, b - 4, &rd);
+    lv_canvas_draw_rect(canvas, 1, b, 7, b + 1, &rd);
+}
+
 struct connection_status_state {
     bool connected;
 };
@@ -73,6 +87,9 @@ static void draw_top(lv_obj_t *widget, lv_color_t cbuf[], const struct status_st
     draw_profile_status(canvas, state);
     draw_battery_status(canvas, state);
     draw_battery_peripheral_status(canvas, state);
+    if (mm_on) {
+        draw_mouse_mover_indicator(canvas);
+    }
 }
 
 /**
@@ -254,6 +271,19 @@ static int display_activity_event_handler(const zmk_event_t *eh) {
 
 ZMK_LISTENER(nice_view_gem_display, display_activity_event_handler);
 ZMK_SUBSCRIPTION(nice_view_gem_display, zmk_activity_state_changed);
+
+static int display_mouse_mover_event_handler(const zmk_event_t *eh) {
+    const struct zmk_mouse_mover_state_changed *ev = as_zmk_mouse_mover_state_changed(eh);
+    if (ev == NULL) {
+        return -ENOTSUP;
+    }
+    mm_on = ev->enabled;
+    force_redraw_all_widgets();
+    return 0;
+}
+
+ZMK_LISTENER(widget_mouse_mover, display_mouse_mover_event_handler);
+ZMK_SUBSCRIPTION(widget_mouse_mover, zmk_mouse_mover_state_changed);
 
 #if defined(CONFIG_TOUCAN_STATUS_SCREEN) && CONFIG_TOUCAN_STATUS_SCREEN == 2
 /**
