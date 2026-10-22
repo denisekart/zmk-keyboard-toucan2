@@ -49,18 +49,18 @@ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 static bool mm_on;       /* mouse mover toggle state; event-driven, off at boot */
 static uint8_t mm_profile; /* 0 straight, 1 curves; shown as a dot next to the glyph */
 
-/* Original thin staircase mouse-cursor glyph (9x13), bottom-left; a 2x2 dot
- * marks the curves profile. */
+/* Original thin staircase mouse-cursor glyph (9x13), bottom-left with a
+ * clear margin from the corner; a 2x2 dot marks the curves profile. */
 static void draw_mouse_mover_indicator(lv_obj_t *canvas) {
     lv_draw_rect_dsc_t rd;
     init_rect_dsc(&rd, LVGL_FOREGROUND);
-    int b = SCREEN_HEIGHT - 4; /* glyph bottom row */
-    lv_canvas_draw_rect(canvas, 1, b - 11, 2, b - 1, &rd);
-    lv_canvas_draw_rect(canvas, 3, b - 9, 4, b - 3, &rd);
-    lv_canvas_draw_rect(canvas, 5, b - 7, 6, b - 4, &rd);
-    lv_canvas_draw_rect(canvas, 1, b, 7, b + 1, &rd);
+    int b = SCREEN_HEIGHT - 8; /* glyph bottom row */
+    lv_canvas_draw_rect(canvas, 5, b - 11, 6, b - 1, &rd);
+    lv_canvas_draw_rect(canvas, 7, b - 9, 8, b - 3, &rd);
+    lv_canvas_draw_rect(canvas, 9, b - 7, 10, b - 4, &rd);
+    lv_canvas_draw_rect(canvas, 5, b, 11, b + 1, &rd);
     if (mm_profile == 1) {
-        lv_canvas_draw_rect(canvas, 10, b - 2, 11, b - 1, &rd); /* curves marker */
+        lv_canvas_draw_rect(canvas, 14, b - 2, 15, b - 1, &rd); /* curves marker */
     }
 }
 
