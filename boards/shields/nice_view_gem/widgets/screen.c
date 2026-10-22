@@ -47,22 +47,42 @@ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 #include "sleep.h"
 
 static bool mm_on;       /* mouse mover toggle state; event-driven, off at boot */
-static uint8_t mm_profile; /* 0 straight, 1 curves; shown as a dot next to the glyph */
+static uint8_t mm_profile; /* 0 straight, 1 curves; shown by the glyph's steam */
 
-/* Original thin staircase mouse-cursor glyph (9x13), bottom-left with a
- * clear margin from the corner; 2x2 dots 2 px right of the glyph mark the
- * profile: one = straight, two stacked = natural curves. */
+/* "Coffee break" glyph, 12 px wide x 10 rows, one hex mask per row with
+ * bit 11 = leftmost pixel (set = ink); drawn pixel-exact with set_px,
+ * bottom-left with a clear margin. Cup + handle; straight steam = straight
+ * walk profile, wavy steam = natural curves. (The old lv_canvas_draw_rect
+ * calls passed corner pairs where LVGL v8 expects (x, y, w, h) — that
+ * smeared the previous glyph into unreadable bars.) */
+static const uint16_t mm_glyph[10] = {
+    0x202, /* ..#.......#.  steam */
+    0x202,
+    0x202,
+    0x000,
+    0x7FC, /* .#########..  rim */
+    0x405, /* .#.......#.#  walls + handle */
+    0x405,
+    0x406, /* .#.......##.  handle joins cup */
+    0x208, /* ..#.....#...  taper */
+    0x1F0, /* ...#####....  base */
+};
+
 static void draw_mouse_mover_indicator(lv_obj_t *canvas) {
-    lv_draw_rect_dsc_t rd;
-    init_rect_dsc(&rd, LVGL_FOREGROUND);
-    int b = SCREEN_HEIGHT - 8; /* glyph bottom row */
-    lv_canvas_draw_rect(canvas, 5, b - 11, 6, b - 1, &rd);
-    lv_canvas_draw_rect(canvas, 7, b - 9, 8, b - 3, &rd);
-    lv_canvas_draw_rect(canvas, 9, b - 7, 10, b - 4, &rd);
-    lv_canvas_draw_rect(canvas, 5, b, 11, b + 1, &rd);
-    lv_canvas_draw_rect(canvas, 14, b - 2, 15, b - 1, &rd); /* profile dot */
-    if (mm_profile == 1) {
-        lv_canvas_draw_rect(canvas, 14, b - 4, 15, b - 3, &rd); /* curves: 2nd dot */
+    static const uint16_t steam_wavy[3] = {
+        0x208, /* steam leans right... */
+        0x110, /* ...then left: curves profile */
+        0x208,
+    };
+    const int x = 8; /* left margin from screen edge */
+    const int top = SCREEN_HEIGHT - 17; /* 8 px bottom margin */
+    for (int r = 0; r < 10; r++) {
+        uint16_t bits = (r < 3 && mm_profile == 1) ? steam_wavy[r] : mm_glyph[r];
+        for (int c = 0; c < 12; c++) {
+            if (bits & (0x800u >> c)) {
+                lv_canvas_set_px(canvas, x + c, top + r, LVGL_FOREGROUND);
+            }
+        }
     }
 }
 
