@@ -85,9 +85,9 @@
         drag-continuation;
         drag-continuation-edge-buffer = <100>; // default 80 +25%: easier to catch, still edge-only
         drag-continuation-slide; // auto-slide at rest in the buffer: defaults 250 ms dwell / 12 px still
-        drag-continuation-slide-speed = <850>;
+        drag-continuation-slide-speed = <800>;
 
-        three-finger-tap;
+        three-finger-tap; 
     };
 };
 
