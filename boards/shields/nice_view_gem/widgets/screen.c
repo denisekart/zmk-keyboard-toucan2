@@ -49,37 +49,51 @@ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 static bool mm_on;       /* mouse mover toggle state; event-driven, off at boot */
 static uint8_t mm_profile; /* 0 straight, 1 curves; shown by the glyph's steam */
 
-/* "Coffee break" glyph, 12 px wide x 10 rows, one hex mask per row with
- * bit 11 = leftmost pixel (set = ink); drawn pixel-exact with set_px,
- * bottom-left with a clear margin. Cup + handle; straight steam = straight
- * walk profile, wavy steam = natural curves. (The old lv_canvas_draw_rect
- * calls passed corner pairs where LVGL v8 expects (x, y, w, h) — that
- * smeared the previous glyph into unreadable bars.) */
-static const uint16_t mm_glyph[10] = {
-    0x202, /* ..#.......#.  steam */
-    0x202,
-    0x202,
-    0x000,
-    0x7FC, /* .#########..  rim */
-    0x405, /* .#.......#.#  walls + handle */
-    0x405,
-    0x406, /* .#.......##.  handle joins cup */
-    0x208, /* ..#.....#...  taper */
-    0x1F0, /* ...#####....  base */
+/* "Coffee break" glyph: 14 px wide x 21 rows (bit 15-c = column c, set =
+ * ink), 2 px strokes everywhere so it reads at arm's length. Three steam
+ * wisps rise 7 px off the rim: straight columns = straight walk profile,
+ * zigzag-sheared wisps = natural curves. Drawn pixel-exact with set_px at
+ * the bottom-left; the WPM chart ends 35 px above the glyph, the layer
+ * text 20 px clear horizontally. */
+static const uint16_t mm_steam_straight[6] = {
+    0x1B60, /* cols 3-4, 6-7, 9-10 */
+    0x1B60, 0x1B60, 0x1B60, 0x1B60, 0x1B60,
+};
+static const uint16_t mm_steam_wavy[6] = {
+    0x0DB0, /* zigzag band A: cols 4-5, 7-8, 10-11 */
+    0x0DB0,
+    0x36C0, /* band B shears left: 2-3, 5-6, 8-9 */
+    0x36C0,
+    0x0DB0,
+    0x0DB0,
+};
+static const uint16_t mm_cup[15] = {
+    0x0000, /* air gap: steam reads off the rim */
+    0x3FF0, /* cols 2-11: rim */
+    0x3FF0,
+    0x3030, /* walls cols 2-3, 10-11 */
+    0x3030,
+    0x303F, /* handle top bar cols 12-15 */
+    0x3033, /* handle outer col 14-15, 2 px hole */
+    0x3033,
+    0x303F, /* handle bottom bar */
+    0x3030,
+    0x3030,
+    0x1FF8, /* taper */
+    0x0FF0, /* base */
+    0x0FF0,
+    0x0FF0,
 };
 
 static void draw_mouse_mover_indicator(lv_obj_t *canvas) {
-    static const uint16_t steam_wavy[3] = {
-        0x208, /* steam leans right... */
-        0x110, /* ...then left: curves profile */
-        0x208,
-    };
-    const int x = 8; /* left margin from screen edge */
-    const int top = SCREEN_HEIGHT - 17; /* 8 px bottom margin */
-    for (int r = 0; r < 10; r++) {
-        uint16_t bits = (r < 3 && mm_profile == 1) ? steam_wavy[r] : mm_glyph[r];
-        for (int c = 0; c < 12; c++) {
-            if (bits & (0x800u >> c)) {
+    const int x = 6;   /* left margin */
+    const int top = SCREEN_HEIGHT - 27; /* 6 px bottom margin below row 161 */
+    const uint16_t *steam =
+        (mm_profile == 1) ? mm_steam_wavy : mm_steam_straight;
+    for (int r = 0; r < 21; r++) {
+        uint16_t bits = (r < 6) ? steam[r] : mm_cup[r - 6];
+        for (int c = 0; c < 16; c++) {
+            if (bits & (0x8000u >> c)) {
                 lv_canvas_set_px(canvas, x + c, top + r, LVGL_FOREGROUND);
             }
         }
