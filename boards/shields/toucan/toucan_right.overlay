@@ -62,8 +62,8 @@
         report-rate-idle = <20>; // 20ms poll while pad-idle (preset 50): first touch after a pause feels instant
         timeout-idle-touch = <120>; // linger 2min in IDLE-TOUCH (50ms) after touch ends (preset 60s): back-to-back use stays hot
         scroll-angle = <30>;
-        zoom-initial-distance = <12>; // explicit pinch gate (factory preset was never written/known); raise by 4 if hair-trigger
-        zoom-consecutive-distance = <6>; // half of initial: once zooming, keep flowing
+        zoom-initial-distance = <28>; // explicit pinch gate: high enough scroll keeps priority for small two-finger motions; raise to 36 if scroll still hijacks
+        zoom-consecutive-distance = <14>; // half of initial: once zooming, keep flowing
         sensitivity = <100>;
         scroll-sensitivity = <100>;
         zoom-sensitivity = <100>;
