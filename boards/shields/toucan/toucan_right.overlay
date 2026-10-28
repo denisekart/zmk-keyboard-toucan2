@@ -77,8 +77,8 @@
         single-tap;
         press-and-hold;
         //swipes;
-        three-finger-swipe;
-        three-finger-swipe-throttle-ms = <1200>;
+        three-finger-zoom; // 3-finger vertical slide = zoom wheel; L/R slides do nothing
+        three-finger-zoom-gate-px = <24>; // low gate: only other 3-finger function is tap, which slides ~0px
         switch-xy;
         //invert-scroll-y;
         invert-scroll-x;
