@@ -69,7 +69,7 @@
         zoom-sensitivity = <100>;
         precision-damp; // halve sub-4px cursor reports to kill slow-drag tremor; full speed returns on any >=6px report
         filter-settings=<0x0B>;
-        hold-time = <320>;
+        hold-time = <280>; // was 320: snappier drag pickup; taps released in 280-320ms band may arm drag instead of click - revert if slow taps misfire
 
         zoom;
         scroll;
