@@ -6,7 +6,6 @@ modules/
 zmk-adaptive-key/
 zmk-auto-layer/
 zmk-helpers/
-zmk-input-zoom/
 zmk-leader-key/
 zmk-mouse-mover/
 zmk-rgbled-widget/

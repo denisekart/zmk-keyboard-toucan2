@@ -105,19 +105,6 @@
 
 / {
     input_processors {
-        zip_zoom_mapper: zip_zoom_mapper {
-            compatible = "zmk,input-processor-zoom";
-            #input-processor-cells = <0>;
-            event-code = <INPUT_REL_MISC>;
-            sensitivity = <25>; /* one app-zoom step per 25 pinch units — deliberate increments, not bursts */
-#ifdef TOUCAN_WIN_MODE
-            bindings = <&kp LC(MINUS)>, <&kp LC(EQUAL)>;
-#else
-            bindings = <&kp LG(MINUS)>, <&kp LG(EQUAL)>;
-#endif
-            track-remainders;
-        };
-
         is_touching_processor:is_touching_processor {
             compatible = "zmk,input-processor-behaviors";
             #input-processor-cells = <0>;
@@ -161,8 +148,7 @@
         input-processors = <
         &zip_xy_scaler 4 5>, 
         <&zip_scroll_scaler 1 16>, 
-        <&zip_zoom_mapper>,
-        <&is_touching_processor>, 
+        <&is_touching_processor>,
         <&swipe_button_mapper>; 
         
         scroller {
